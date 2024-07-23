@@ -101,3 +101,18 @@ $ python -c 'from pyo3_101 import say_hello; print(say_hello(name="Oogi", confer
 Hello Oogi, welcome to PyCon
 (pyo3venv)
 ```
+
+Add new function `check_reg` to work with files, test:
+
+```
+$ maturin develop
+...
+
+$ python -c 'from pyo3_101 import check_reg; print(check_reg("reg.txt", "Oogi"))'                                                          [11:59:19]
+thread '<unnamed>' panicked at src/lib.rs:19:41:
+File not found: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+pyo3_runtime.PanicException: File not found: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+```
