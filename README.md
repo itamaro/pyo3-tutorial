@@ -160,3 +160,13 @@ $ maturin develop
 $ python -c 'from pyo3_101 import count_attendees; print(count_attendees(["otherreg.txt", "Oogi"]))'                                       [12:15:28]
 2
 ```
+
+Add a function for calculating the average travel budget over a dictionary, test:
+
+```
+$ maturin develop
+...
+
+$ python -c 'from pyo3_101 import travel_avg; print(travel_avg({"otherreg.txt": 5, "Oogi": 8}))'                                           [12:25:02]
+6.5
+```

@@ -1,6 +1,6 @@
 use pyo3::exceptions::PyFileNotFoundError;
 use pyo3::prelude::*;
-use std::{fs::File, io::Read};
+use std::{collections::HashMap, fs::File, io::Read};
 
 #[pyfunction]
 #[pyo3(signature = (name, conference="the conference".to_string()))]
@@ -38,6 +38,18 @@ fn count_attendees(att_list: Vec<String>) -> PyResult<usize> {
     Ok(att_list.len())
 }
 
+/// Calculate average travel budget over {attendee -> budget} dictionary
+#[pyfunction]
+fn travel_avg(budget_dict: HashMap<String, f32>) -> PyResult<f32> {
+    let mut sum: f32 = 0.0;
+    let mut count = 0;
+    for (_, budget) in budget_dict {
+        sum += budget;
+        count += 1;
+    }
+    Ok(sum / (count as f32))
+}
+
 /// A Python module implemented in Rust.
 #[pymodule]
 fn pyo3_101(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -45,5 +57,6 @@ fn pyo3_101(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     m.add_function(wrap_pyfunction!(check_reg, m)?)?;
     m.add_function(wrap_pyfunction!(count_attendees, m)?)?;
+    m.add_function(wrap_pyfunction!(travel_avg, m)?)?;
     Ok(())
 }
