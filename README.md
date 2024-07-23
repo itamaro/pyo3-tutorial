@@ -141,3 +141,12 @@ $ echo "1. Oogizaur is registered" >> reg.txt                                   
 $ python -c 'from pyo3_101 import check_reg; print(check_reg("reg.txt", "Oogi"))'                                                          [12:07:52]
 You are registered
 ```
+
+Wrap original error instead:
+
+```
+$ python -c 'from pyo3_101 import check_reg; print(check_reg("otherreg.txt", "Oogi"))'                                                     [12:10:27]
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: No such file or directory (os error 2)
+```

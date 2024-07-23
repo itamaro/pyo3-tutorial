@@ -28,7 +28,7 @@ fn check_reg(filename: String, name: String) -> PyResult<String> {
                 Ok("Sorry, you are not in the list".to_string())
             }
         }
-        Err(_) => Err(PyFileNotFoundError::new_err("File doesn't exist")),
+        Err(err) => Err(PyFileNotFoundError::new_err(err)),
     }
 }
 
