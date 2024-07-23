@@ -150,3 +150,13 @@ Traceback (most recent call last):
   File "<string>", line 1, in <module>
 FileNotFoundError: No such file or directory (os error 2)
 ```
+
+Add a function for counting attendees in list, test:
+
+```
+$ maturin develop
+...
+
+$ python -c 'from pyo3_101 import count_attendees; print(count_attendees(["otherreg.txt", "Oogi"]))'                                       [12:15:28]
+2
+```
