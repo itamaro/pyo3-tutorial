@@ -116,3 +116,15 @@ Traceback (most recent call last):
   File "<string>", line 1, in <module>
 pyo3_runtime.PanicException: File not found: Os { code: 2, kind: NotFound, message: "No such file or directory" }
 ```
+
+Raise proper Python exception for file not found, test:
+
+```
+$ maturin develop
+...
+
+$ python -c 'from pyo3_101 import check_reg; print(check_reg("reg.txt", "Oogi"))'                                                          [12:04:07]
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: File doesn't exist
+```

@@ -1,3 +1,4 @@
+use pyo3::exceptions::PyFileNotFoundError;
 use pyo3::prelude::*;
 use std::{fs::File, io::Read};
 
@@ -16,13 +17,18 @@ fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
 /// Give
 #[pyfunction]
 fn check_reg(filename: String, name: String) -> PyResult<String> {
-    let mut file = File::open(filename).expect("File not found");
-    let mut content = String::new();
-    file.read_to_string(&mut content)?;
-    if content.contains(&name) {
-        Ok("You are registered".to_string())
-    } else {
-        Ok("Sorry, you are not in the list".to_string())
+    let res = File::open(filename);
+    match res {
+        Ok(mut file) => {
+            let mut content = String::new();
+            file.read_to_string(&mut content)?;
+            if content.contains(&name) {
+                Ok("You are registered".to_string())
+            } else {
+                Ok("Sorry, you are not in the list".to_string())
+            }
+        }
+        Err(_) => Err(PyFileNotFoundError::new_err("File doesn't exist")),
     }
 }
 
