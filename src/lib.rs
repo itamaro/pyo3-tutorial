@@ -1,6 +1,7 @@
 use pyo3::prelude::*;
 
 #[pyfunction]
+#[pyo3(signature = (name, conference="the conference".to_string()))]
 fn say_hello(name: String, conference: String) -> PyResult<String> {
     Ok(format!("Hello {}, welcome to {}", name, conference))
 }

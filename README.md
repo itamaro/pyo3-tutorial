@@ -77,3 +77,27 @@ $ python -c 'import pyo3_101 as p1; print(p1.say_hello("Oogi", "PyCon"))'       
 Hello Oogi, welcome to PyCon
 (pyo3venv)
 ```
+
+Add default value for `conference` and test:
+
+```
+$ maturin develop                                                                                                                          [11:43:34]
+📦 Including license file "/Users/itamaro/work/pyo3-tutorial/pyo3_101/LICENSE"
+🔗 Found pyo3 bindings
+🐍 Found CPython 3.12 at /Users/itamaro/work/pyo3-tutorial/pyo3venv/bin/python
+📡 Using build options features from pyproject.toml
+   Compiling pyo3_101 v0.1.0 (/Users/itamaro/work/pyo3-tutorial/pyo3_101)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.40s
+📦 Built wheel for CPython 3.12 to /var/folders/8f/h1vmzw5s5jv8wl9_msv5xq0c0000gn/T/.tmpFnbfYz/pyo3_101-0.1.0-cp312-cp312-macosx_11_0_arm64.whl
+✏️  Setting installed package as editable
+🛠 Installed pyo3_101-0.1.0
+(pyo3venv)
+
+$ python -c 'from pyo3_101 import say_hello; print(say_hello(name="Oogi"))'                                                                [11:43:41]
+Hello Oogi, welcome to the conference
+(pyo3venv)
+
+$ python -c 'from pyo3_101 import say_hello; print(say_hello(name="Oogi", conference="PyCon"))'                                            [11:43:43]
+Hello Oogi, welcome to PyCon
+(pyo3venv)
+```
