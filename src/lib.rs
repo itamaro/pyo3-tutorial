@@ -53,7 +53,6 @@ fn travel_avg(budget_dict: HashMap<String, f32>) -> PyResult<f32> {
 /// A class representing conference attendee
 #[pyclass]
 struct Attendee {
-    #[pyo3(get)]
     name: String,
     #[pyo3(get)]
     is_speaker: bool,
