@@ -205,3 +205,12 @@ $ maturin develop
 $ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); print(me.name, me.is_speaker)'                                   [10:01:26]
 OOGI False
 ```
+
+Test what happens if trying to write to `name` with no setter:
+
+```
+$ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); me.name = "Bert"; print(me.name, me.is_speaker)'                 [10:02:15]
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+AttributeError: attribute 'name' of 'builtins.Attendee' objects is not writable
+```
