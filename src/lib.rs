@@ -1,4 +1,4 @@
-use pyo3::exceptions::PyFileNotFoundError;
+use pyo3::exceptions::{PyFileNotFoundError, PyValueError};
 use pyo3::prelude::*;
 use std::{collections::HashMap, fs::File, io::Read};
 
@@ -62,8 +62,12 @@ struct Attendee {
 #[pymethods]
 impl Attendee {
     #[new]
-    fn new(name: String, is_speaker: bool) -> Self {
-        Attendee { name, is_speaker }
+    fn new(name: String, is_speaker: bool) -> PyResult<Self> {
+        if name.is_empty() {
+            Err(PyValueError::new_err("Must provide name"))
+        } else {
+            Ok(Attendee { name, is_speaker })
+        }
     }
 }
 

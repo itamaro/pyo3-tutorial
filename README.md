@@ -180,3 +180,18 @@ $ maturin develop
 $ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); print(me.name, me.is_speaker)'                                    [9:54:07]
 Oogi False
 ```
+
+Add empty name validation, test:
+
+```
+$ maturin develop
+...
+
+$ python -c 'from pyo3_101 import Attendee; me = Attendee("", False); print(me.name, me.is_speaker)'                                        [9:58:23]
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ValueError: Must provide name
+
+$ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); print(me.name, me.is_speaker)'                                    [9:58:26]
+Oogi False
+```
