@@ -195,3 +195,13 @@ ValueError: Must provide name
 $ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); print(me.name, me.is_speaker)'                                    [9:58:26]
 Oogi False
 ```
+
+Add custom name getter method that uppercases the name, test:
+
+```
+$ maturin develop
+...
+
+$ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); print(me.name, me.is_speaker)'                                   [10:01:26]
+OOGI False
+```

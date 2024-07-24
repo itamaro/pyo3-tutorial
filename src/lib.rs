@@ -69,6 +69,11 @@ impl Attendee {
             Ok(Attendee { name, is_speaker })
         }
     }
+
+    #[getter]
+    fn get_name(&self) -> PyResult<String> {
+        Ok(self.name.to_uppercase())
+    }
 }
 
 /// A Python module implemented in Rust.
