@@ -1,5 +1,6 @@
 use pyo3::exceptions::{PyFileNotFoundError, PyValueError};
 use pyo3::prelude::*;
+use pyo3::types::PyType;
 use std::{collections::HashMap, fs::File, io::Read};
 
 #[pyfunction]
@@ -53,6 +54,8 @@ fn travel_avg(budget_dict: HashMap<String, f32>) -> PyResult<f32> {
 /// A class representing conference attendee
 #[pyclass]
 struct Attendee {
+    #[pyo3(get)]
+    id: u32,
     name: String,
     #[pyo3(get)]
     is_speaker: bool,
@@ -60,12 +63,24 @@ struct Attendee {
 
 #[pymethods]
 impl Attendee {
+    #[classattr]
+    fn next_id() -> u32 {
+        0
+    }
+
     #[new]
-    fn new(name: String, is_speaker: bool) -> PyResult<Self> {
+    #[classmethod]
+    fn new(cls: Bound<'_, PyType>, name: String, is_speaker: bool) -> PyResult<Self> {
         if name.is_empty() {
             Err(PyValueError::new_err("Must provide name"))
         } else {
-            Ok(Attendee { name, is_speaker })
+            let id = cls.getattr("next_id")?.extract()?;
+            cls.setattr("next_id", id + 1)?;
+            Ok(Attendee {
+                id,
+                name,
+                is_speaker,
+            })
         }
     }
 

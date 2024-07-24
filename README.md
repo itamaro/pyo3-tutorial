@@ -224,3 +224,16 @@ $ maturin develop
 $ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); me.name = "Bert"; print(me.name, me.is_speaker)'                 [10:04:43]
 BERT False
 ```
+
+Add attendee ID with auto-incrementing "next ID" as class attribute, test:
+
+```
+$ maturin develop
+...
+
+$ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); me.name = "Bert"; oog = Attendee("Oogi", True); print("\n".join(f"{a.name} {a.is_speaker} {a.id}" for a in [me, oog])); print(Attendee.next_id); print(Attendee.next_id)'
+BERT False 0
+OOGI True 1
+2
+2
+```
