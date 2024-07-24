@@ -50,6 +50,23 @@ fn travel_avg(budget_dict: HashMap<String, f32>) -> PyResult<f32> {
     Ok(sum / (count as f32))
 }
 
+/// A class representing conference attendee
+#[pyclass]
+struct Attendee {
+    #[pyo3(get)]
+    name: String,
+    #[pyo3(get)]
+    is_speaker: bool,
+}
+
+#[pymethods]
+impl Attendee {
+    #[new]
+    fn new(name: String, is_speaker: bool) -> Self {
+        Attendee { name, is_speaker }
+    }
+}
+
 /// A Python module implemented in Rust.
 #[pymodule]
 fn pyo3_101(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -58,5 +75,6 @@ fn pyo3_101(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(check_reg, m)?)?;
     m.add_function(wrap_pyfunction!(count_attendees, m)?)?;
     m.add_function(wrap_pyfunction!(travel_avg, m)?)?;
+    m.add_class::<Attendee>()?;
     Ok(())
 }

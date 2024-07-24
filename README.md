@@ -170,3 +170,13 @@ $ maturin develop
 $ python -c 'from pyo3_101 import travel_avg; print(travel_avg({"otherreg.txt": 5, "Oogi": 8}))'                                           [12:25:02]
 6.5
 ```
+
+Add an `Attendee` class, test:
+
+```
+$ maturin develop
+...
+
+$ python -c 'from pyo3_101 import Attendee; me = Attendee("Oogi", False); print(me.name, me.is_speaker)'                                    [9:54:07]
+Oogi False
+```
