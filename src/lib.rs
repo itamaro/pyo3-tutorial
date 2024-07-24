@@ -74,6 +74,16 @@ impl Attendee {
     fn get_name(&self) -> PyResult<String> {
         Ok(self.name.to_uppercase())
     }
+
+    #[setter]
+    fn set_name(&mut self, name: String) -> PyResult<()> {
+        if name.is_empty() {
+            Err(PyValueError::new_err("Must provide name"))
+        } else {
+            self.name = name;
+            Ok(())
+        }
+    }
 }
 
 /// A Python module implemented in Rust.
